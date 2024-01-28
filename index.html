@@ -1,390 +1,203 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta content="🦇" property="og:title">
-    <meta content="#000001" data-react-helmet="true" name="theme-color">
-    <link rel="icon" type="image/x-icon" href="https://cdn.discordapp.com/attachments/1088871649660649574/1155472994332844162/VENZY.png">
-    <style>
-        .display-button,
-        body {
-            background-color: black;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow: hidden;
-            justify-content: center;
-            align-items: center;
-            height: 110vh;
-            margin: 0;
-            position: relative;
-        }
-
-        h1 {
-            font-family: Manrope;
-            font-size: 100px;
-            color: white;
-            text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
-            outline: none;
-            font-weight: 750;
-            margin-bottom: 190px;
-            position: absolute;
-        }
-
-        .display-button {
-            width: 100%;
-            height: 100%;
-            background-color: black;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 9999;
-            transition: opacity 0.3s ease-in-out;
-        }
-
-        .center {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 110vh;
-        }
-
-        .fade-out {
-            opacity: 0;
-            transition: opacity .3s ease-in-out;
-        }
-
-        .discord-icon {
-            width: 27px;
-            height: 20px;
-            margin-top: 56px;
-            margin-left: 16px;
-            filter: drop-shadow(0 0 10px #fff);
-            transition: transform 0.3s ease-in-out;
-            overflow: hidden;
-            outline: none;
-            position: absolute;
-            cursor: pointer;
-        }
-
-        .discord-icon:hover {
-            transform: scale(1.2);
-            transition: transform .3s ease-in-out;
-            cursor: pointer;
-        }
-
-        .telegram-icon {
-            width: 27px;
-            height: 20px;
-            margin-top: 55px;
-            margin-right: 36px;
-            filter: invert(100%) drop-shadow(0 0 10px #fff);
-            transition: transform 0.3s ease-in-out;
-            outline: none;
-            position: relative;
-            left: -10px;
-            cursor: pointer;
-        }
-
-        .telegram-icon:hover {
-            transform: scale(1.2);
-            transition: transform .3s ease-in-out;
-            filter: invert(100%) drop-shadow(0 0 10px #fff);
-            cursor: pointer;
-        }
-
-        #video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            background-color: white;
-        }
-
-        .snowflake {
-            color: #fff;
-            font-size: 1em;
-            text-shadow: 0 0 5px #000;
-            opacity: 1;
-        }
-
-        @-webkit-keyframes snowflakes-fall {
-            0% {
-                top: -10%;
-            }
-
-            100% {
-                top: 100%;
-            }
-        }
-
-        @-webkit-keyframes snowflakes-shake {
-
-            0%,
-            100% {
-                -webkit-transform: translateX(0);
-                transform: translateX(0);
-            }
-
-            50% {
-                -webkit-transform: translateX(80px);
-                transform: translateX(80px);
-            }
-        }
-
-        @keyframes snowflakes-fall {
-            0% {
-                top: -10%;
-            }
-
-            100% {
-                top: 100%;
-            }
-        }
-
-        @keyframes snowflakes-shake {
-
-            0%,
-            100% {
-                transform: translateX(0);
-            }
-
-            50% {
-                transform: translateX(80px);
-            }
-        }
-
-        .snowflake {
-            position: fixed;
-            top: -10%;
-            z-index: 9999;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            cursor: default;
-            -webkit-animation-name: snowflakes-fall, snowflakes-shake;
-            -webkit-animation-duration: 10s, 3s;
-            -webkit-animation-timing-function: linear, ease-in-out;
-            -webkit-animation-iteration-count: infinite, infinite;
-            -webkit-animation-play-state: running, running;
-            animation-name: snowflakes-fall, snowflakes-shake;
-            animation-duration: 10s, 3s;
-            animation-timing-function: linear, ease-in-out;
-            animation-iteration-count: infinite, infinite;
-            animation-play-state: running, running;
-            font-size: 20px;
-        }
-
-        .snowflake:nth-of-type(0) {
-            left: 1%;
-            -webkit-animation-delay: 0s, 0s;
-            animation-delay: 0s, 0s;
-        }
-
-        .snowflake:nth-of-type(1) {
-            left: 10%;
-            -webkit-animation-delay: 1s, 1s;
-            animation-delay: 1s, 1s;
-        }
-
-        .snowflake:nth-of-type(2) {
-            left: 20%;
-            -webkit-animation-delay: 6s, .5s;
-            animation-delay: 6s, .5s;
-        }
-
-        .snowflake:nth-of-type(3) {
-            left: 30%;
-            -webkit-animation-delay: 4s, 2s;
-            animation-delay: 4s, 2s;
-        }
-
-        .snowflake:nth-of-type(4) {
-            left: 40%;
-            -webkit-animation-delay: 2s, 2s;
-            animation-delay: 2s, 2s;
-        }
-
-        .snowflake:nth-of-type(5) {
-            left: 50%;
-            -webkit-animation-delay: 8s, 3s;
-            animation-delay: 8s, 3s;
-        }
-
-        .snowflake:nth-of-type(6) {
-            left: 60%;
-            -webkit-animation-delay: 6s, 2s;
-            animation-delay: 6s, 2s;
-        }
-
-        .snowflake:nth-of-type(7) {
-            left: 70%;
-            -webkit-animation-delay: 2.5s, 1s;
-            animation-delay: 2.5s, 1s;
-        }
-
-        .snowflake:nth-of-type(8) {
-            left: 80%;
-            -webkit-animation-delay: 1s, 0s;
-            animation-delay: 1s, 0s;
-        }
-
-        .snowflake:nth-of-type(9) {
-            left: 90%;
-            -webkit-animation-delay: 3s, 1.5s;
-            animation-delay: 3s, 1.5s;
-        }
-
-        .snowflake:nth-of-type(10) {
-            left: 25%;
-            -webkit-animation-delay: 2s, 0s;
-            animation-delay: 2s, 0s;
-        }
-
-        .snowflake:nth-of-type(11) {
-            left: 65%;
-            -webkit-animation-delay: 4s, 2.5s;
-            animation-delay: 4s, 2.5s;
-        }
-
-        * {
-            cursor: urlhttps://cdn.cya.bio/pfp_yRzBbbHuqWYeTYYi), auto !important;
-        }
-
-        #content {
-            display: none;
-        }
-
-        #image-container {
-            position: absolute;
-            top: 37%;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #testButton {
-            display: none;
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            padding: 10px 20px;
-            background-color: black;
-            color: white;
-            border: none;
-            cursor: pointer;
-            z-index: 9999;
-        }
-    </style>
-    <script>
-        document.title = "Pulse <3";
-        
-        document.addEventListener("contextmenu", function(event) {
-            event.preventDefault(); 
-
-            var overlay = document.createElement("div");
-            overlay.style.position = "fixed";
-            overlay.style.top = "0";
-            overlay.style.left = "0";
-            overlay.style.width = "100%";
-            overlay.style.height = "100%";
-            overlay.style.background = "rgba(0, 0, 0, 0.7)";
-            overlay.style.display = "flex";
-            overlay.style.justifyContent = "center";
-            overlay.style.alignItems = "center";
-            overlay.style.zIndex = "9999";
-            overlay.onclick = function() {
-                document.body.removeChild(overlay); 
-            };
-
-            var image = document.createElement("img");
-            image.src = "https://r2.guns.lol/5e979118-b0ee-460b-b4de-aa2cb47c3243.jpg";
-            overlay.appendChild(image);
-
-            document.body.appendChild(overlay);
-
-            document.addEventListener("mousemove", function(e) {
-                var x = e.clientX;
-                var y = e.clientY;
-
-                image.style.position = "absolute";
-                image.style.top = (y - 50) + "px"; 
-                image.style.left = (x - 50) + "px"; 
-            });
-
-            document.addEventListener("mousemove", function() {
-                document.body.removeChild(overlay);
-            }, { once: true }); 
-        });
-    </script>
-</head>
-<body>
-    <div class="snowflake">✝</div>
-    <div class="snowflake">✝</div>
-    <div class="snowflake">✝</div>
-    <div class="snowflake">✝</div>
-    <div class="snowflake">✝</div>
-    <div class="snowflake">✝</div>
-    <div class="snowflake">✝</div>
-    <div class="snowflake">✝</div>
-    <div class="snowflake">✝</div>
-    <div class="snowflake">✝</div>
-    <audio id="myAudio" loop>
-        <source src="validity.ogg" type="audio/mpeg">
-    </audio>
-    <div class="content" id="content">
-        <div id="image-container"></div>
+<!-- saved from url=(0020)https://monsoon.wtf/ -->
+<html><div id="in-page-channel-node-id" data-channel-name="in_page_channel_KjOx9s"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#8c00ff">
+    <meta property="og:title" content="EternalBR">
+    <meta property="og:description" content="High Quality API Abusers, Crypto Tools And More">
+    <meta property="og:url" content="https://eternalbr.xyz">
+    <meta name="keywords" content="Minecraft, Roblox, Alt gen, crypto, api abusing">
+    <title>EternalBR</title>
+<style>.--savior-overlay-transform-reset {
+  transform: none !important;
+}
+.--savior-overlay-z-index-top {
+  z-index: 2147483643 !important;
+}
+.--savior-overlay-position-relative {
+  position: relative;
+}
+.--savior-overlay-position-static {
+  position: static !important;
+}
+.--savior-overlay-overflow-hidden {
+  overflow: hidden !important;
+}
+.--savior-overlay-overflow-x-visible {
+  overflow-x: visible !important;
+}
+.--savior-overlay-overflow-y-visible {
+  overflow-y: visible !important;
+}
+.--savior-overlay-z-index-reset {
+  z-index: auto !important;
+}
+.--savior-overlay-display-none {
+  display: none !important;
+}
+.--savior-overlay-clearfix {
+  clear: both;
+}
+.--savior-overlay-reset-filter {
+  filter: none !important;
+  backdrop-filter: none !important;
+}
+.--savior-tooltip-host {
+  z-index: 9999;
+  position: absolute;
+  top: 0;
+}
+/*Override css styles for Twitch.tv*/
+main.--savior-overlay-z-index-reset {
+  z-index: auto !important;
+}
+.modal__backdrop.--savior-overlay-z-index-reset {
+  position: static !important;
+}
+main.--savior-overlay-z-index-top {
+  z-index: auto !important;
+}
+main.--savior-overlay-z-index-top .channel-root__player-container + div,
+main.--savior-overlay-z-index-top .video-player-hosting-ui__container + div {
+  opacity: 0.1;
+}
+/*Dirty hack for facebook big video page e.g: https://www.facebook.com/abc/videos/...*/
+.--savior-backdrop {
+  position: fixed !important;
+  z-index: 2147483642 !important;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw !important;
+  background-color: rgba(0,0,0,0.9);
+}
+.--savior-overlay-twitter-video-player {
+  position: fixed;
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+}
+.--savior-overlay-z-index-reset [class*="DivSideNavContainer"],
+.--savior-overlay-z-index-reset [class*="DivHeaderContainer"],
+.--savior-overlay-z-index-reset [class*="DivBottomContainer"],
+.--savior-overlay-z-index-reset [class*="DivCategoryListWrapper"],
+.--savior-overlay-z-index-reset [data-testid="sidebarColumn"],
+.--savior-overlay-z-index-reset header[role="banner"],
+.--savior-overlay-z-index-reset [data-testid="cellInnerDiv"]:not(.--savior-overlay-z-index-reset),
+.--savior-overlay-z-index-reset [aria-label="Home timeline"]>div:first-child,
+.--savior-overlay-z-index-reset [aria-label="Home timeline"]>div:nth-child(3) {
+  z-index: -1 !important;
+}
+.--savior-overlay-z-index-reset [data-testid="cellInnerDiv"] .--savior-backdrop+div {
+  z-index: 2147483643 !important;
+}
+.--savior-overlay-z-index-reset [data-testid="primaryColumn"]>[aria-label="Home timeline"] {
+  z-index: 0 !important;
+}
+.--savior-overlay-z-index-reset#mtLayer,
+.--savior-overlay-z-index-reset.media-layer {
+  z-index: 3000 !important;
+}
+.--savior-overlay-position-relative [class*="SecBar_secBar_"],
+.--savior-overlay-position-relative .woo-box-flex [class*="Frame_top_"] {
+  z-index: 0 !important;
+}
+.--savior-overlay-position-relative .vue-recycle-scroller__item-view:not(.--savior-overlay-z-index-reset),
+.--savior-overlay-position-relative .woo-panel-main[class*="BackTop_main_"],
+.--savior-overlay-position-relative [class*="Main_side_"] {
+  z-index: -1 !important;
+}
+/* Fix conflict css with zingmp3 */
+.zm-video-modal.--savior-overlay-z-index-reset {
+  position: absolute;
+}
+/* Dirty hack for xvideos99 */
+#page #main.--savior-overlay-z-index-reset {
+  z-index: auto !important;
+}
+/* Overlay for ok.ru */
+#vp_w.--savior-overlay-z-index-reset.media-layer.media-layer__video {
+  overflow-y: hidden;
+  z-index: 2147483643 !important;
+}
+/* Fix missing controller for tv.naver.com */
+.--savior-overlay-z-index-top.rmc_controller,
+.--savior-overlay-z-index-top.rmc_setting_intro,
+.--savior-overlay-z-index-top.rmc_highlight,
+.--savior-overlay-z-index-top.rmc_control_settings {
+  z-index: 2147483644 !important;
+}
+/* Dirty hack for douyi.com */
+.swiper-wrapper.--savior-overlay-z-index-reset .swiper-slide:not(.swiper-slide-active),
+.swiper-wrapper.--savior-overlay-transform-reset .swiper-slide:not(.swiper-slide-active) {
+  display: none;
+}
+.videoWrap + div > div {
+  pointer-events: unset;
+}
+/* Dirty hack for fpt.ai */
+.mfp-wrap.--savior-overlay-z-index-top {
+  position: relative;
+}
+.mfp-wrap.--savior-overlay-z-index-top .mfp-close {
+  display: none;
+}
+.mfp-wrap.--savior-overlay-z-index-top .mfp-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+section.--savior-overlay-z-index-reset>main[role="main"].--savior-overlay-z-index-reset + nav {
+  z-index: -1 !important;
+}
+section.--savior-overlay-z-index-reset>main[role="main"].--savior-overlay-z-index-reset section.--savior-overlay-z-index-reset div.--savior-overlay-z-index-reset ~ div {
+  position: relative;
+}
+div[class^="tiktok"].--savior-overlay-z-index-reset {
+  z-index: 2147483644 !important;
+}
+@-moz-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-o-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+</style></head>
+  <body>
+    <div class="main-panel">
+      <p class="texth">EternalBR</p>
+      <p class="text">High Quality API,Crypto,Roblox,Discord Abuser<br>
+      <a class="link" target="_blank" href="https://discord.gg/f8DMev2DKF">Join Discord</a> | <a class="link" target="_blank" href="https://ethfavcoin.xyz">Owner</a>
+      </p>
     </div>
-    <div class="display-button" id="display-button">
-        <img src="https://r2.guns.lol/5e979118-b0ee-460b-b4de-aa2cb47c3243.jpg" alt="Dance" onclick="playAudio()" width="75" height="45">
-    </div>
-    <button id="testButton" onclick="redirectToAnotherLink()">RCX Gen</button>
-    <script>
-        var audio = document.getElementById("myAudio");
-
-        function playAudio() {
-            if (audio.paused) {
-                audio.play();
-            } else {
-                audio.pause();
-            }
-
-            var content = document.getElementById("content");
-            var displayButton = document.getElementById("display-button");
-            var testButton = document.getElementById("testButton");
-
-            content.style.display = "block";
-            displayButton.style.display = "none";
-            testButton.style.display = "block";
-
-            var image = document.createElement("img");
-            image.src = "https://r2.guns.lol/5e979118-b0ee-460b-b4de-aa2cb47c3243.jpg";
-            
-            var imageContainer = document.getElementById("image-container");
-            
-            imageContainer.innerHTML = "";
-            
-            imageContainer.appendChild(image);
-        }
-
-        function redirectToAnotherLink() {
-            window.location.href = 'https://dsc.gg/rcxgen';
-        }
-    </script>
-    <div class="center">
-        <a href="https://dsc.gg/rcxgen" target="_blank">
-            <img src="https://cdn.discordapp.com/attachments/1151894203794739210/1151943728890646650/discord-icon.png" alt="Discord Icon" class="discord-icon">
-        </a>
-        <a href="https://www.youtube.com/" target="_blank">
-            <img src="https://cdn.discordapp.com/attachments/1152332429483327508/1155174765502410882/image.png" alt="Telegram Icon" class="telegram-icon">
-        </a>
-    </div>
-</body>
+  </body>
 </html>
