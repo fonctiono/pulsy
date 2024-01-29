@@ -1,1 +1,1 @@
-# functiono.github.io/pulsy is the link
+# https://fonctiono.github.io/pulsy/ is the link
